@@ -1,8 +1,8 @@
-1. Summery: We will be creating 8 functions in order to become familiar with formal grammer,
+1. Summary: We will be creating 8 functions in order to become familiar with formal grammer,
 context free grammar, and regular grammar. The first 4 functions will help us to learn about
 the types of inputs that grammers take and the rules that they use to determine which inputs 
-are accepted and regected. Functions 5-7 attempt to differentiate the types of grammer 
-(formal, context, regular) using the first 4 functions used to evaluate the elements. We are 
+are accepted and rejected. Functions 5-7 attempt to differentiate the types of grammer 
+(formal, context, regular), using the first 4 functions to evaluate the elements. We are 
 being asked to correlate the elements of grammers in order to better understand their 
 functionality. We will go about implementing these functions systematicly. First we will implement
 functions 1-4 using list?, car, cdr, cons, and cond to get the elements. For function 5, we will 
