@@ -1,8 +1,21 @@
-1. Summery: We will be creating 8 functions in order to become familiar with formal grammer, context free grammar, and regular
- grammar. The first 4 functions will help us to learn about the types of inputs that grammers take and the rules that they use to determine which inputs are accepted and regected. Functions 5-7 attempt to differentiate the types of grammer (formal, context, regular) using the first 4 functions used to evaluate the elements. We are being asked to correlate the elements of grammers in order to better understand their functionality. 
-We will go about implementing these functions systematicly. First we will implement functions 1-4 using list?, car, cdr, cons, and cond to get the elements. For function 5, we will be using the first 4 functions and helper functions to implement and test. We will use cond statements to check each property and stop checking when we get a false statement. We will use map or recursion in order to efficiently solve the problem. For function 6, we will use part of function 5 in order to see if it is formal grammer and then we will check the formal grammer guide for the next properties. This will be implemented with recursion or mapping and conds. For 7 we will use function 6 as a conds case and then check the grammer guide for the next properties.
+1. Summery: We will be creating 8 functions in order to become familiar with formal grammer,
+context free grammar, and regular grammar. The first 4 functions will help us to learn about
+the types of inputs that grammers take and the rules that they use to determine which inputs 
+are accepted and regected. Functions 5-7 attempt to differentiate the types of grammer 
+(formal, context, regular) using the first 4 functions used to evaluate the elements. We are 
+being asked to correlate the elements of grammers in order to better understand their functionality. 
+We will go about implementing these functions systematicly. First we will implement functions 1-4 
+using list?, car, cdr, cons, and cond to get the elements. For function 5, we will be using the first 
+4 functions and helper functions to implement and test. We will use cond statements to check each 
+property and stop checking when we get a false statement. We will use map or recursion in order to 
+efficiently solve the problem. For function 6, we will use part of function 5 in order to see if it is 
+formal grammer and then we will check the formal grammer guide for the next properties. This will be 
+implemented with recursion or mapping and conds. For 7 we will use function 6 as a conds case and then 
+check the grammer guide for the next properties.
 
-2. The most challenging aspect of this process may be understanding what it means for the function to be context free and using map and recursion to find compinations and use rules. It may also be scary connecting everything together. 
+2. The most challenging aspect of this process may be understanding what it means for the function to 
+be context free and using map and recursion to find compinations and use rules. It may also be scary 
+connecting everything together. 
 
 3. Mentor hours, office hours, buddies in the class
 
