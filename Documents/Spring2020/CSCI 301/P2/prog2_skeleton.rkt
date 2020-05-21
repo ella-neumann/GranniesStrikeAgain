@@ -25,11 +25,6 @@
               ((C) (d) ())) 
              S))
 
-(define G4 '((S A)
-             (a b c) 
-             (a)
-             S))
-
 ; 1. get-variables
 ; take a grammar as input and returns the set of variables. 
 ; Parameters:
@@ -69,6 +64,9 @@
 ; fourth element of the grammar 4-tuple).
 (define (get-start-symbol G)
   (car(cdr(cdr(cdr G)))))
+  
+  
+;; From lab3:
 
 (define (s-in? a A)(define (torf) #f)
   (cond
@@ -76,24 +74,69 @@
     [(equal? (car A) a)#t]
     [(not(equal? (car A)a))(s-in? a (cdr A))]))
 
-(define (listOfList? G)
-  
-  (andmap (lambda (n) (andmap (lambda (g) (list? g))G))
+; s-add
+;
+; Adds the element a to the set A.
+;
+; Parameters:
+;     a (integer, string or list) : The value to add to list A.
+;     A (list) : list of elements to add a to
+;
+; Returns:
+;     The list A containing the element a. (May return empty list)
 
+(define (s-add a A)
+  (cond ((s-in? a A) A)
+        (else (append (list a) A))))
+
+; s-union
+;
+; Produces a set of all elements in the set A or in the set B.
+;
+; Parameters:
+;     A (list) : A set of elements
+;     B (list) : A set of elements
+;
+; Returns:
+;     A list containing all elements only in A and only in B. (May return empty list)
+
+(define (s-union A B)
+  (cond ((empty? B) A)
+        ((empty? A) B)
+        ((empty? (cdr A))
+         (cond ((s-in? (car A) B) B)
+               (else (s-add (car A) B))))
+        ((s-in? (car A) B) (s-add (car A) (s-union (cdr A) (s-remove (car A) B))))
+        (else(s-add (car A) (s-union (cdr A) B)))))
+        
 (define (s-remove a A)
   (cond
     [(empty? A) '()]
     [(equal? a (car A))(s-remove a (cdr A))]
-    [else (cons (car A)(s-remove a (cdr A)))]))
-
+    [else (cons (car A)(s-remove a (cdr A)))]))        
+        
 (define (s-intersect A B)
   (s-remove'()(map (lambda (a)(cond
                     [(s-in? a B)a]
                     [else null]))A)))
+                    
+                    
+;; lab4 5-8                    
 
-(define (s-subset? A B)
-  (andmap (lambda (a)(s-in? a B))A)) 
+; listOfList?
+;
+; Checks if the list G contains list elements
+;
+; Parameters:
+;     G (list) : A list of elements
+;
+; Returns:
+;     True if each element of G is a list
+;     False if there is at least one element of G that is not a list
 
+(define (listOfList? G)
+  (andmap (lambda (g) (list? g))G))
+  
 ; 5. is-formal-grammar?
 ; takes a grammar as input and returns true if it is a valid
 ; formal grammar (and returns false otherwise).
@@ -114,25 +157,31 @@
   (and(and (and(and (and (equal? 4 (length G))
        (and (and (list? (get-variables G))(list? (get-rules G))) (list? (get-alphabet G))))
        (not(list? (get-start-symbol G))))
-       (listOfList? (get-rules G1)))
+       (if (andmap (lambda (z) (list? z)) (get-rules G)) (andmap (lambda (y) (listOfList? y))(get-rules G)) #f))
        (if (empty? (s-intersect (get-alphabet G) (get-variables G))) #t #f))
        (s-in? 'S (get-variables G))))
 
 (is-formal-grammar? G2)
 (is-formal-grammar? G1)
-(is-formal-grammar? G4)
 
 ; 6. is-context-free?
 ; takes a grammar as input and returns true if it is a formal
 ; grammar and each rule fits the definition of context free grammar
 ; in the Formal Grammar Guide 
+;Every rule has form: v --> t, where v in V and t in (Σ U V)*
+; 
 ; Parameters:
 ; G (grammar): (V, Σ, R, S), 4-tuple
 ; Returns:
 ; True if it is a formal grammar and each rule fits the definition of
 ; context free grammar in the Formal Grammar Guide; returns false otherwise.
-; (define (is-context-free? G)
+ (define (is-context-free? G)
+   (s-union (get-variables G) (get-alphabet G)))
+; check if each element (list) of each rule (list)
+; i.e. rule = ((S) (aA) ()) then check if every element in (S) is in (Σ U V)
+; check if every element in (aA) is in (Σ U V) and....
 
+(is-context-free? G3)
 ; 7. is-regular-grammar?
 ; takes a grammar as input and returns true if it is a context
 ; free grammar and each rule fits the definition of right regular
