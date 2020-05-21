@@ -25,6 +25,11 @@
               ((C) (d) ())) 
              S))
 
+(define G4 '((S A)
+             (a b c) 
+             (a)
+             S))
+
 ; 1. get-variables
 ; take a grammar as input and returns the set of variables. 
 ; Parameters:
@@ -32,14 +37,8 @@
 ; Returns:
 ; A set of variables (i.e. the
 ; first element in the grammar 4-tuple).
-
-;case where there are no variables?
 (define (get-variables G)
   (car G))
-;test cases
-(get-variables G3)
-(get-variables G2)
-
 
 ; 2. get-alphabet
 ; take a grammar as input and returns the set of terminals.
@@ -71,6 +70,30 @@
 (define (get-start-symbol G)
   (car(cdr(cdr(cdr G)))))
 
+(define (s-in? a A)(define (torf) #f)
+  (cond
+    [(empty? A)(torf)]
+    [(equal? (car A) a)#t]
+    [(not(equal? (car A)a))(s-in? a (cdr A))]))
+
+(define (listOfList? G)
+  
+  (andmap (lambda (n) (andmap (lambda (g) (list? g))G))
+
+(define (s-remove a A)
+  (cond
+    [(empty? A) '()]
+    [(equal? a (car A))(s-remove a (cdr A))]
+    [else (cons (car A)(s-remove a (cdr A)))]))
+
+(define (s-intersect A B)
+  (s-remove'()(map (lambda (a)(cond
+                    [(s-in? a B)a]
+                    [else null]))A)))
+
+(define (s-subset? A B)
+  (andmap (lambda (a)(s-in? a B))A)) 
+
 ; 5. is-formal-grammar?
 ; takes a grammar as input and returns true if it is a valid
 ; formal grammar (and returns false otherwise).
@@ -87,7 +110,17 @@
 ; Returns:
 ;  true if it is a valid
 ; formal grammar (and returns false otherwise)
-; (define (is-formal-grammar? G)
+(define (is-formal-grammar? G)
+  (and(and (and(and (and (equal? 4 (length G))
+       (and (and (list? (get-variables G))(list? (get-rules G))) (list? (get-alphabet G))))
+       (not(list? (get-start-symbol G))))
+       (listOfList? (get-rules G1)))
+       (if (empty? (s-intersect (get-alphabet G) (get-variables G))) #t #f))
+       (s-in? 'S (get-variables G))))
+
+(is-formal-grammar? G2)
+(is-formal-grammar? G1)
+(is-formal-grammar? G4)
 
 ; 6. is-context-free?
 ; takes a grammar as input and returns true if it is a formal
@@ -123,3 +156,4 @@
 ; Returns:
 ; a string in the language, where the string is represented as a list of symbols in the alphabet.
 ; (define (generate-random-string G)
+
