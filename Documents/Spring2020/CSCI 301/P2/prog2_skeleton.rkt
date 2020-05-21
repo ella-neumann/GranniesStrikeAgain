@@ -18,4 +18,10 @@
               ((B) (b C) (d))
               ((C) (d) ())) 
              S))
+;case where there are no variables?
+(define (get-variables G)
+  (car G))
+;test cases
+(get-variables G3)
+(get-variables G2)
 
