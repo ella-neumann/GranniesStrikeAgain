@@ -1,5 +1,11 @@
 #lang racket
 
+; prog2.rkt
+; Jessica Stillwell and Ella Neumann
+; Spring 2020
+;
+; This program deciphers wheither a grammer is formal, context free, or regular grammar with the help of other functions.
+
 (define G1 '((S) 
              (a)
              (((S) (a S) ()))
@@ -18,6 +24,15 @@
               ((B) (b C) (d))
               ((C) (d) ())) 
              S))
+
+; 1. get-variables
+; take a grammar as input and returns the set of variables. 
+; Parameters:
+; G (grammar): (V, Σ, R, S), 4-tuple
+; Returns:
+; A set of variables (i.e. the
+; first element in the grammar 4-tuple).
+
 ;case where there are no variables?
 (define (get-variables G)
   (car G))
@@ -25,3 +40,86 @@
 (get-variables G3)
 (get-variables G2)
 
+
+; 2. get-alphabet
+; take a grammar as input and returns the set of terminals.
+; Parameters:
+; G (grammar): (V, Σ, R, S), 4-tuple
+; Returns:
+; A set of terminals (i.e. the
+; second element in the grammar 4-tuple).
+(define (get-alphabet G)
+  (car(cdr G)))
+
+; 3. get-rules
+; take a grammar as input and returns the set of rules. 
+; Parameters:
+; G (grammar): (V, Σ, R, S), 4-tuple
+; Returns:
+; A set of rules (i.e. the third
+; element in the grammar 4-tuple).
+(define (get-rules G)
+  (car(cdr(cdr G))))
+
+; 4. get-start-symbol
+; take a grammar as input and returns the start symbol. 
+; Parameters:
+; G (grammar): (V, Σ, R, S), 4-tuple
+; Returns:
+; A start symbol (i.e. the
+; fourth element of the grammar 4-tuple).
+(define (get-start-symbol G)
+  (car(cdr(cdr(cdr G)))))
+
+; 5. is-formal-grammar?
+; takes a grammar as input and returns true if it is a valid
+; formal grammar (and returns false otherwise).
+; We say the Racket representation G of the
+; grammar is valid if all of the following are true
+; • G is a list of length four
+; • All but the last element of G is itself a list
+; • The last element of G is not a list
+; • Each of the rules in G is a list of lists
+; • Σ ∩ V = ∅
+; • S ∈ V
+; Parameters:
+; G (grammar): (V, Σ, R, S), 4-tuple
+; Returns:
+;  true if it is a valid
+; formal grammar (and returns false otherwise)
+; (define (is-formal-grammar? G)
+
+; 6. is-context-free?
+; takes a grammar as input and returns true if it is a formal
+; grammar and each rule fits the definition of context free grammar
+; in the Formal Grammar Guide 
+; Parameters:
+; G (grammar): (V, Σ, R, S), 4-tuple
+; Returns:
+; True if it is a formal grammar and each rule fits the definition of
+; context free grammar in the Formal Grammar Guide; returns false otherwise.
+; (define (is-context-free? G)
+
+; 7. is-regular-grammar?
+; takes a grammar as input and returns true if it is a context
+; free grammar and each rule fits the definition of right regular
+; regular grammar in the Formal Grammar Guide; returns false otherwise.
+; Parameters:
+; G (grammar): (V, Σ, R, S), 4-tuple
+; Returns:
+; True if it is a context
+; free grammar and each rule fits the definition of right regular regular grammar in the
+; Formal Grammar Guide; returns false otherwise.
+;(define (is-regular-grammar? G) )
+
+; 8. generate-random-string
+; takes a context-free grammar G and produces a string in the language, where the string
+; is represented as a list of symbols in the alphabet. It should start with the start symbol,
+; and always rewrite the left-most non-terminal, randomly picking among the rewrite rules for
+; that non-terminal (see (random n)). It only needs to support context-free grammars; if passed
+; a grammar that is not context-free, it should return an empty list. 
+; Parameters:
+; G (context free grammar): (V, Σ, R, S), 4-tuple
+; Returns:
+; a string in the language, where the string is represented as a list of symbols in the alphabet.
+; (define (generate-random-string G)
