@@ -175,13 +175,19 @@
 ; Returns:
 ; True if it is a formal grammar and each rule fits the definition of
 ; context free grammar in the Formal Grammar Guide; returns false otherwise.
- (define (is-context-free? G)
-   (s-union (get-variables G) (get-alphabet G)))
-; check if each element (list) of each rule (list)
-; i.e. rule = ((S) (aA) ()) then check if every element in (S) is in (Σ U V)
-; check if every element in (aA) is in (Σ U V) and....
 
-(is-context-free? G3)
+(define (listchkr OG P l)
+  (cond ((list? P) (andmap (lambda (g) (listchkr OG g l))P))
+        (else (s-in? P l))))
+
+
+(define (is-context-free? G)
+   (and (is-formal-grammar? G)
+        (and (listchkr G (map (lambda (x) (car x)) (get-rules G)) (get-variables G))
+             (listchkr G (map (lambda (x) (cdr x)) (get-rules G)) (s-union (get-alphabet G) (get-variables G))))))
+
+(is-context-free? G3)  
+
 ; 7. is-regular-grammar?
 ; takes a grammar as input and returns true if it is a context
 ; free grammar and each rule fits the definition of right regular
