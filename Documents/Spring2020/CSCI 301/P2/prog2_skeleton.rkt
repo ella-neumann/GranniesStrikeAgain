@@ -199,6 +199,26 @@
 ; free grammar and each rule fits the definition of right regular regular grammar in the
 ; Formal Grammar Guide; returns false otherwise.
 ;(define (is-regular-grammar? G) )
+(define G4 '((S A B C)
+             (a b c d e f) 
+             (;((S) (A a b c B d e f C) ())  
+              ((A) (a B) (e C) (a))
+              ((B) (b C) (d))
+              ((C) (d) ())) 
+             S))
+
+(define (is-regular-grammer? G)
+  (cond
+    [(empty? (get-rules G))]
+    [(or (or (equal? #t (vtoa (car(get-rules G))) '() )
+                                          (equal? #t (vtoau (car(get-rules)) '() )))
+                                          (equal? #t (vtoe (car(get-rules))))) (is-regular-grammer? (cdr(get-rules G)))]
+    [else #f]))
+      
+(define (vtoa G empty)
+  (cond
+    [(empty? G) empty]
+    [else (append (andmap (lambda (g) (s-in? g (get-alphabet G))) G) empty) (
 
 ; 8. generate-random-string
 ; takes a context-free grammar G and produces a string in the language, where the string
