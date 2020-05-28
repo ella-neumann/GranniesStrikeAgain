@@ -198,27 +198,35 @@
 ; True if it is a context
 ; free grammar and each rule fits the definition of right regular regular grammar in the
 ; Formal Grammar Guide; returns false otherwise.
-;(define (is-regular-grammar? G) )
+
 (define G4 '((S A B C)
              (a b c d e f) 
-             (;((S) (A a b c B d e f C) ())  
-              ((A) (a B) (e C) (a))
-              ((B) (b C) (d))
-              ((C) (d) ())) 
+             (((A) (a B) (e C) (a))
+              ((B) () (d)))
              S))
 
-(define (is-regular-grammer? G)
+(define (vto G empty)
   (cond
-    [(empty? (get-rules G))]
-    [(or (or (equal? #t (vtoa (car(get-rules G))) '() )
-                                          (equal? #t (vtoau (car(get-rules)) '() )))
-                                          (equal? #t (vtoe (car(get-rules))))) (is-regular-grammer? (cdr(get-rules G)))]
+    [(empty? G) true]
+    [(empty? (car G)) (vto (cdr G) empty)]
+    [(andmap (lambda (g) (s-in? g '(a b c d e f))) (car G)) (vto (cdr G) empty)]
+    [(> (length (car G)) 2) #f]
+    [(and (equal? (length (car G)) 2) (and (s-in? (car(car G)) '(a b c d e f)) (s-in?  (car(cdr(car G))) '(S A B C))))
+     (vto (cdr G) empty)]
+    [else false]))
+
+(define (ruleChkr R)
+  (cond
+    [(empty? R)]
+    [(vto (cdr (car R)) '()) (ruleChkr (cdr R))]                                   
     [else #f]))
-      
-(define (vtoa G empty)
-  (cond
-    [(empty? G) empty]
-    [else (append (andmap (lambda (g) (s-in? g (get-alphabet G))) G) empty) (
+
+(define (is-regular-grammar? G)
+  (and (is-context-free? G) (ruleChkr (get-rules G)))) 
+ 
+
+"check regular grammar"
+(is-regular-grammar? G4)
 
 ; 8. generate-random-string
 ; takes a context-free grammar G and produces a string in the language, where the string
