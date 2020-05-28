@@ -121,7 +121,7 @@
                     [else null]))A)))
                     
                     
-;; lab4 5-8                    
+;; P2 5-8                    
 
 ; listOfList?
 ;
@@ -161,8 +161,25 @@
        (if (empty? (s-intersect (get-alphabet G) (get-variables G))) #t #f))
        (s-in? 'S (get-variables G))))
 
-(is-formal-grammar? G2)
-(is-formal-grammar? G1)
+
+; listchkr
+;
+; Checks if each element in the sublists of rules, P, from the grammar, OG, 
+; is in the list l.
+;
+; Parameters:
+;     OG (list) : A list of four elements, a Grammar
+;     P (list) : A list of rules
+;     l (list) : The list to check for the elements of P
+;
+; Returns:
+;     True if each element of P is in the list l
+;     False if there is at least one element of P that is not in the list l
+
+(define (listchkr OG P l)
+  (cond ((list? P) (andmap (lambda (g) (listchkr OG g l))P))
+        (else (s-in? P l))))
+
 
 ; 6. is-context-free?
 ; takes a grammar as input and returns true if it is a formal
@@ -176,18 +193,39 @@
 ; True if it is a formal grammar and each rule fits the definition of
 ; context free grammar in the Formal Grammar Guide; returns false otherwise.
 
-(define (listchkr OG P l)
-  (cond ((list? P) (andmap (lambda (g) (listchkr OG g l))P))
-        (else (s-in? P l))))
-
 
 (define (is-context-free? G)
    (and (is-formal-grammar? G)
         (and (listchkr G (map (lambda (x) (car x)) (get-rules G)) (get-variables G))
              (listchkr G (map (lambda (x) (cdr x)) (get-rules G)) (s-union (get-alphabet G) (get-variables G))))))
 
-(is-context-free? G3)  
+; vto
+;
+; Checks if each non-terminal in the list of rules, points to an element of form:
+; v--> a where a is in the alphabet (alph)
+; v--> au where a is in the alphabet, u is in variables (var)
+; v--> e where e is an empty list
+; 
+; Parameters:
+;     G (list) : A list of rules
+;     alph (list) : The alphabet of the grammar
+;     var (list) : The list of variables from the grammar
+;     empty (list) : An empty list
+;
+; Returns:
+;     True if each non-terminal points to one of the above conditions, for each terminal.
+;     False if there is at least one non-terminal that points to a nonconforming terminal.
 
+(define (vto G empty)
+  (cond
+    [(empty? G) true]
+    [(empty? (car G)) (vto (cdr G) empty)]
+    [(andmap (lambda (g) (s-in? g '(a b c d e f))) (car G)) (vto (cdr G) empty)]
+    [(> (length (car G)) 2) #f]
+    [(and (equal? (length (car G)) 2) (and (s-in? (car(car G)) '(a b c d e f)) (s-in?  (car(cdr(car G))) '(S A B C))))
+     (vto (cdr G) empty)]
+    [else false]))
+    
 ; 7. is-regular-grammar?
 ; takes a grammar as input and returns true if it is a context
 ; free grammar and each rule fits the definition of right regular
@@ -199,21 +237,6 @@
 ; free grammar and each rule fits the definition of right regular regular grammar in the
 ; Formal Grammar Guide; returns false otherwise.
 
-(define G4 '((S A B C)
-             (a b c d e f) 
-             (((A) (a B) (e C) (a))
-              ((B) () (d)))
-             S))
-
-(define (vto G empty)
-  (cond
-    [(empty? G) true]
-    [(empty? (car G)) (vto (cdr G) empty)]
-    [(andmap (lambda (g) (s-in? g '(a b c d e f))) (car G)) (vto (cdr G) empty)]
-    [(> (length (car G)) 2) #f]
-    [(and (equal? (length (car G)) 2) (and (s-in? (car(car G)) '(a b c d e f)) (s-in?  (car(cdr(car G))) '(S A B C))))
-     (vto (cdr G) empty)]
-    [else false]))
 
 (define (ruleChkr R)
   (cond
@@ -224,9 +247,6 @@
 (define (is-regular-grammar? G)
   (and (is-context-free? G) (ruleChkr (get-rules G)))) 
  
-
-"check regular grammar"
-(is-regular-grammar? G4)
 
 ; 8. generate-random-string
 ; takes a context-free grammar G and produces a string in the language, where the string
