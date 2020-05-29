@@ -81,7 +81,7 @@
     [(equal? (car A) a)#t]
     [(not(equal? (car A)a))(s-in? a (cdr A))]))
 
-; s-add
+; s-add - JS
 ;
 ; Adds the element a to the set A.
 ;
@@ -96,7 +96,7 @@
   (cond ((s-in? a A) A)
         (else (append (list a) A))))
 
-; s-union
+; s-union - JS
 ;
 ; Produces a set of all elements in the set A or in the set B.
 ;
