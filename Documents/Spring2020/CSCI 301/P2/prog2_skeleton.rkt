@@ -257,8 +257,8 @@
   (cond
     [(empty? G) true]
     [(empty? (car G)) (vto (cdr G) alph var empty)]
-    [(andmap (lambda (g) (s-in? g alph)) (car G)) (vto (cdr G) alph var empty)]
     [(> (length (car G)) 2) #f]
+    [(andmap (lambda (g) (s-in? g alph)) (car G)) (vto (cdr G) alph var empty)]
     [(and (equal? (length (car G)) 2) (and (s-in? (car(car G)) alph) (s-in?  (car(cdr(car G))) var)))
      (vto (cdr G) alph var empty)]
     [else false]))
