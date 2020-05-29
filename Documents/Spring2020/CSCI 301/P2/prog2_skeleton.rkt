@@ -74,6 +74,13 @@
   
   
 ;; From lab3:
+(s-in? a A)
+; Processes list and element and returns true if and only if a ∈ A.
+; Parameters:
+;    a (single value): value in list
+;    A (list) [OPTIONAL, default ’()]
+; Returns:
+;    true if and only if a ∈ A.
 
 (define (s-in? a A)(define (torf) #f)
   (cond
