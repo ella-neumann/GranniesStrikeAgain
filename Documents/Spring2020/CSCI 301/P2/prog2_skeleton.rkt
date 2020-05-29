@@ -238,7 +238,15 @@
      (vto (cdr G) alph var empty)]
     [else false]))
 
-; Helper function for 7
+; ruleChkr
+; takes a grammer and a rule as an input and sees if vto is true for that rule
+; Parameters:
+;    G (grammar): (V, Σ, R, S), 4-tuple
+;    R (rule): (get-rules G)
+; Returns:
+;    true if vto is true
+;    fales if vto is false
+
 (define (ruleChkr G R)
   (cond
     [(empty? R)]
