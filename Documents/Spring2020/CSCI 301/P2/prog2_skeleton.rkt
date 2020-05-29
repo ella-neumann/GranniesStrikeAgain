@@ -115,13 +115,27 @@
                (else (s-add (car A) B))))
         ((s-in? (car A) B) (s-add (car A) (s-union (cdr A) (s-remove (car A) B))))
         (else(s-add (car A) (s-union (cdr A) B)))))
-        
+
+; (s-remove a A) - EN
+; Processes set and element and returns the set containing all (and only) the elements in A - {a}
+; Parameters:
+;    a (single value): value in list
+;    A (list) [OPTIONAL, default ’()]
+; Returns:
+;    set containing all (and only) the elements in A - {a}
 (define (s-remove a A)
   (cond
     [(empty? A) '()]
     [(equal? a (car A))(s-remove a (cdr A))]
     [else (cons (car A)(s-remove a (cdr A)))]))        
-        
+
+; (s-intersect A B) - EN
+; processes two lists and returns the set containing all (and only) the elements in A ∩ B.
+; Parameters:
+;    A (list) [OPTIONAL, default ’()]
+;    B (list) [OPTIONAL, default ’()]
+; Returns:
+;    set containing all (and only) the elements in A ∩ B.
 (define (s-intersect A B)
   (s-remove'()(map (lambda (a)(cond
                     [(s-in? a B)a]
