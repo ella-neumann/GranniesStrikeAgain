@@ -187,6 +187,17 @@
   (cond ((list? P) (andmap (lambda (g) (listchkr OG g l))P))
         (else (s-in? P l))))
 
+; length-1
+;
+; Checks if the length of the left most element of the rule is 1
+;
+; Parameters:
+;     R (get-rules) : get-rules function
+;
+; Returns:
+;     True if the first element in the rule is length 1
+;     False if the first element in the fule is not length 1
+
 (define (length-1 R)
   (cond
     [(empty? R)]
