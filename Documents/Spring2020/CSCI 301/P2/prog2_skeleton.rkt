@@ -216,15 +216,21 @@
 ;     True if each non-terminal points to one of the above conditions, for each terminal.
 ;     False if there is at least one non-terminal that points to a nonconforming terminal.
 
-(define (vto G empty)
+(define (vto G alph var empty)
   (cond
     [(empty? G) true]
-    [(empty? (car G)) (vto (cdr G) empty)]
-    [(andmap (lambda (g) (s-in? g '(a b c d e f))) (car G)) (vto (cdr G) empty)]
+    [(empty? (car G)) (vto (cdr G) alph var empty)]
+    [(andmap (lambda (g) (s-in? g alph)) (car G)) (vto (cdr G) alph var empty)]
     [(> (length (car G)) 2) #f]
-    [(and (equal? (length (car G)) 2) (and (s-in? (car(car G)) '(a b c d e f)) (s-in?  (car(cdr(car G))) '(S A B C))))
-     (vto (cdr G) empty)]
+    [(and (equal? (length (car G)) 2) (and (s-in? (car(car G)) alph) (s-in?  (car(cdr(car G))) var)))
+     (vto (cdr G) alph var empty)]
     [else false]))
+
+(define (ruleChkr G R)
+  (cond
+    [(empty? R)]
+    [(vto (cdr (car R)) (get-alphabet G) (get-variables G)'()) (ruleChkr G (cdr R))]                                   
+    [else #f]))
     
 ; 7. is-regular-grammar?
 ; takes a grammar as input and returns true if it is a context
@@ -237,12 +243,6 @@
 ; free grammar and each rule fits the definition of right regular regular grammar in the
 ; Formal Grammar Guide; returns false otherwise.
 
-
-(define (ruleChkr R)
-  (cond
-    [(empty? R)]
-    [(vto (cdr (car R)) '()) (ruleChkr (cdr R))]                                   
-    [else #f]))
 
 (define (is-regular-grammar? G)
   (and (is-context-free? G) (ruleChkr (get-rules G)))) 
