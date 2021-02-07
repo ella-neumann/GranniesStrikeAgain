@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Assignments</title>
+		<link rel="stylesheet" href="main.css"/>
+		<style type="text/css">
+			body{
+				margin: 0px;
+			}
+			h1{
+				color:lightseagreen;
+				font-family: Arial, Helvetica, sans-serif;
+			}
+			p{
+				color:lightcoral;
+				font-family: monospace;
+				font-weight: bold;
+			}
+			table{
+				border-collapse: collapse;
+				width: 100%;
+			}
+			th{
+				border: 1px solid lightseagreen;
+				padding: 10px;
+			}
+			td{
+				border: 1px solid lightseagreen;
+				padding: 10px;
+			}
+			.menu{
+				width: 100%;
+				background-color: lightcoral;
+				color: black;
+				font-family: Arial, Helvetica, sans-serif;	
+			}
+			.menu-item{
+				font-size: 24px;
+				padding: 10px;
+				display: inline-block;	
+			}
+			.dropdown{
+				display: none;
+			}
+			.menu-item:hover{
+				background-color: lightpink;
+				cursor: pointer;
+			}
+			.menu-item:hover .dropdown{ 
+				width: 158px;
+				height: 50x;
+				background-color: lightcoral;
+				position: absolute;
+				top: 48px;
+				left: 258px;
+				display: block;	 
+			}
+
+			.dropdown-item:hover {
+				background-color: lightpink;
+				cursor: pointer;
+			}
+
+			.container{
+				margin: 0 auto;
+				max-width: 800px;
+				display: block; 
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div class="menu">
+			<div class="menu-item">Jessica's Site</div>
+			<div class="menu-item">Home</div>
+			<div class="menu-item">Assignments
+				<div class="dropdown"> 
+					<div class="dropdown-item">Hello!</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<h1>Jessica's Assignments</h1>
+
+			<p> Full-stack app development 2021.</p>
+			<ul>
+				<li> Difficulty: 1 = no problem at all, 5 = could not do</li>
+				<li> Usefulness: 1 = not a good use of time, 5 = very useful</li>
+			</ul>
+
+			<table>
+				<thead>
+					<tr>
+						<th> # </td>
+						<th> Assignment  </td>
+						<th> Link </td>
+						<th> Time (hours) </td>
+						<th>Difficult (1-5)</th>
+						<th>Useful (1-5)</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td> 1.1</td>
+						<td> Watch tutorial 1, follow along.</td>
+						<td> N/A </td>
+						<td> 2.5</td>
+						<td> 2</td>
+						<td> 5 </td>
+					</tr>
+						
+					<tr>
+						<td> 1.2</td>
+						<td> Deploy your first website to GitHub pages. </td>
+						<td> <a href="https://jessica-stillwell.github.io/randSite/Welcome!"> link</a> </td>
+						<td>  0.6 </td>
+						<td> 1 </td>
+						<td> 4 </td>
+					</tr>
+					<tr>
+						<td> 1.3</td>
+						<td> Deploy an assignments page. </td>
+						<td> <a href="https://jessica-stillwell.github.io/Assignments.html"> link </a> </td>
+						<td> 2.5  </td>
+						<td> 3 </td>
+						<td> 5 </td>
+					</tr>
+					<tr>
+						<td> 1.4*</td>
+						<td> Create a personal professional homepage. </td>
+						<td> <a href="https://jessica-stillwell.github.io/"> link </a> </td> 
+						<td> 4 </td> 
+						<td> 4 </td> 
+						<td> 4 </td> 
+					</tr>
+					<tr>
+						<td> 1.5*</td>
+						<td> Create two screens of your first app. </td>
+						<td colspan="4"></td> 
+					</tr>
+					<tr>
+						<td> 1.6*</td>
+						<td> Create a side menu in CSS.</td>
+						<td colspan="4"></td> 
+					</tr>
+					<tr>
+						<td> 1.A</td>
+						<td> What did you like this week? </td>
+						<td colspan="4"> I really enjoyed learning how to create a basic website from scratch. I learned a lot of cool tools to help me get started and spur curiosity!</td> 
+					</tr>
+					<tr>
+						<td> 1.B</td>
+						<td> What didn't you like this week? </td>
+						<td colspan="4">I had a very difficult time trying to use the frameworks bulma and bootstrap. Researching how to use their style and variables was pretty confusing.</td> 
+					</tr>
+					<tr>
+						<td> 1.C</td>
+						<td> How can we improve the material from this week? </td>
+						<td colspan="4">I think clarifying how to use bulma (the get started info) would be helpful as well as how to use their variables in addition to provided classes.</td> 
+					</tr>
+					<tr>
+						<td> 1.D*</td>
+						<td> Show us anything else you coded up this week! </td>
+						<td colspan="4"></td> 
+					</tr>
+					<tr>
+						<td> 2.1*</td>
+						<td> Watch the first 7 tutorial videos as needed. </td>
+						<td> N/A</td> 
+						<td> 2 </td> 
+						<td> 1 </td> 
+						<td> 3 </td> 
+					</tr>
+					<tr>
+						<td> 2.2</td>
+						<td> Watch tutorial video 2-8. </td>
+						<td> N/A</td> 
+						<td> 2 </td> 
+						<td> 1 </td> 
+						<td> 3 </td> 
+					</tr>
+					<tr>
+						<td> 2.3</td>
+						<td> Write a Python program called fizzbuzz.py. </td>
+						<td> N/A</td> 
+						<td> 10 minutes </td> 
+						<td> 1 </td> 
+						<td> 3 </td> 
+					</tr>
+					<tr>
+						<td> 2.4</td>
+						<td> Write a Python function called primes.</td>
+						<td> N/A</td> 
+						<td> 20 minutes </td> 
+						<td> 2 </td> 
+						<td> 3 </td> 
+					</tr>
+					<tr>
+						<td> 2.5</td>
+						<td> Write a Python function called prime_factorization.</td>
+						<td> N/A</td> 
+						<td> 20 minutes</td> 
+						<td> 3 </td> 
+						<td> 3 </td> 
+					</tr>
+					<tr>
+						<td> 2.6</td>
+						<td> Write a python function called my_sort.</td>
+						<td> N/A</td> 
+						<td> 20 minutes</td> 
+						<td> 3 </td> 
+						<td> 3 </td> 
+					</tr>
+					<tr>
+						<td> 2.7</td>
+						<td> Write a Python program that encrypts and then decrypts a file.</td>
+						<td> N/A</td> 
+						<td> 1.5 hours</td> 
+						<td> 4 </td> 
+						<td> 4 </td> 
+					</tr>
+					<tr>
+						<td> 3.1</td>
+						<td> Watch week 3 tutorial videos.</td>
+						<td> N/A</td> 
+						<td> 2 hours</td> 
+						<td> 2 </td> 
+						<td> 5 </td> 
+					</tr>
+					<tr>
+						<td> 3.2</td>
+						<td> Switch from tuple to dictionary.</td>
+						<td> https://swap-and-grow.azurewebsites.net</td> 
+						<td> 20 minutes</td> 
+						<td> 2 </td> 
+						<td> 3 </td> 
+					</tr>
+					<tr>
+						<td> 3.3</td>
+						<td> Add 'likes' data, display the number of likes and make it possible to find out who liked a post.</td>
+						<td> https://swap-and-grow.azurewebsites.net</td> 
+						<td> 2 hours</td> 
+						<td> 4 </td> 
+						<td> 4 </td> 
+					</tr>
+					<tr>
+						<td> 3.5</td>
+						<td> Allow users to @ mention each other, convert text to link.</td>
+						<td> N/A</td> 
+						<td> 2.5 hours</td> 
+						<td> 5 </td> 
+						<td> 4 </td> 
+					</tr>
+					<tr>
+						<td> 4.2</td>
+						<td> Deploy a Python/Flask app to Microsoft Azure.</td>
+						<td> https://swap-and-grow.azurewebsites.net </td> 
+						<td> 15 minutes</td> 
+						<td> 2 </td> 
+						<td> 4 </td> 
+					</tr>
+				</tbody>
+			
+			</table>
+		</div>
+	</body>
+
+	
+</html>
